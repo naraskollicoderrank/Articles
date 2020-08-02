@@ -14,15 +14,18 @@ let articlesurl: String =  "https://5e99a9b1bc561b0016af3540.mockapi.io/jet2/api
 typealias SuccessBlock = (_ response: Any?, _ error: Error?) -> Void
 typealias FailureBlock = (_ response: Any?, _ error: Error?) -> Void
 
+protocol ArticlesDataProtocol: class {
+    func updateArticles(articles: [Article]?)
+}
+
 class ArticlesViewModel: NSObject {
-    let model: Observable<Article?> = Observable(nil)
+    weak var delegate: ArticlesDataProtocol?
     
     override init() {
         super.init()
     }
     
-    
-    func getArticles(page: Int, count: Int, successHandler: @escaping SuccessBlock, failureHandler: @escaping FailureBlock) {
+    func getArticles(page: Int, count: Int) {
         let urlStr: String = String(format: articlesurl, page, count)
         if let url = URL(string: urlStr) {
             let urlRequest = URLRequest(url:url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60)
@@ -35,9 +38,17 @@ class ArticlesViewModel: NSObject {
             
             let task = session.dataTask(with: urlRequest) { (data, response, error) in
                 if error != nil {
-                    failureHandler(data, error)
+                    return
                 }
-                
+                let decoder = JSONDecoder()
+                do {
+                    if let dataObj = data {
+                        let article = try? decoder.decode([Article].self, from: dataObj)
+                        if let articleObj = article {
+                            self.delegate?.updateArticles(articles: articleObj)
+                        }
+                    }
+                }
             }
             task.resume()
         }

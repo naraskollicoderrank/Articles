@@ -8,36 +8,35 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, ArticlesDataProtocol {
     let viewModel: ArticlesViewModel = ArticlesViewModel()
     lazy var articlesview: ArticlesView = {
-        return ArticlesView()
+        let articlesView = ArticlesView()
+        articlesView.configure()
+        return articlesView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        self.viewModel.delegate = self
+        self.view.backgroundColor = .white
         self.navigationItem.title = "Articles"
         self.view = articlesview
-        getCities()
-        binder()
+        getArticles()
     }
 }
 
 //MARK: API calls
 extension ViewController {
-    func binder() {
-        self.viewModel.model.bindAndFire { (articles) in
-                   
-        }
+    
+    func getArticles() {
+        self.viewModel.getArticles(page: 1, count: 10)
     }
-    func getCities() {
-        self.viewModel.getArticles(page: 1, count: 10, successHandler: { (data, error) in
-            
-        }, failureHandler: { (data, error) in
-            
-        })
+    
+    func updateArticles(articles: [Article]?) {
+        if let articlesArray = articles {
+            self.articlesview.updateView(articles: articlesArray)
+        }
     }
 }

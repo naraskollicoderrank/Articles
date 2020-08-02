@@ -131,7 +131,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <connections>
-                            <outlet property="tableView" destination="wEf-48-vU7" id="ArV-aa-Ttp"/>
+                            <outlet property="tableView" destination="wEf-48-vU7" id="Wjd-n3-lhG"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Qzw-X4-d51"/>

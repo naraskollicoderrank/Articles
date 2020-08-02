@@ -45,6 +45,11 @@ class ArticleTableViewCell: UITableViewCell {
         if let media = article.media?.first {
             setArticleImage(media: media)
         }
+        self.articleContent.text = article.content ?? ""
+        self.articleTitle.text = article.media?.first?.title ?? ""
+        self.articleURL.text = article.media?.first?.url ?? ""
+        self.likes.text = String(format: "%d/1000 Likes", article.likes ?? 0)
+        self.comments.text = String(format: "%d/1000 Comments", article.comments ?? 0)
     }
     
     func setUserImage(user: User) {
