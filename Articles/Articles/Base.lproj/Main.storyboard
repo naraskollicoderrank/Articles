@@ -11,7 +11,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Articles" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="ArticlesView" customModule="Articles" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -117,8 +117,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="uZw-b4-Jne"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="leF-Gb-XRY"/>
+                                    <outlet property="dataSource" destination="8bC-Xf-vdC" id="ezS-EL-YpS"/>
+                                    <outlet property="delegate" destination="8bC-Xf-vdC" id="9oY-YA-zTc"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -130,6 +130,9 @@
                             <constraint firstItem="wEf-48-vU7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="w3w-GE-tnk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outlet property="tableView" destination="wEf-48-vU7" id="ArV-aa-Ttp"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Qzw-X4-d51"/>
                 </viewController>

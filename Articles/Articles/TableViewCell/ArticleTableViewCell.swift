@@ -10,6 +10,8 @@ import UIKit
 
 class ArticleTableViewCell: UITableViewCell {
 
+    static let reuseidentifier = "ArticleTableViewCellIdentifier"
+    
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var userDesignation: UILabel!
@@ -33,4 +35,36 @@ class ArticleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
+    func configure(article: Article) {
+        if let user = article.user?.first {
+            self.username.text = user.name
+            self.userDesignation.text = user.designation
+            setUserImage(user: user)
+        }
+        if let media = article.media?.first {
+            setArticleImage(media: media)
+        }
+    }
+    
+    func setUserImage(user: User) {
+        user.getAvatar(successHandler: { (data, error) in
+            if let dataObj = data as? Data {
+                self.userImageView.image = UIImage(data: dataObj)
+            }
+        }, failureHandler: { (data, error) in
+            
+        })
+    }
+    
+    func setArticleImage(media: Media) {
+        media.getArticleImage(successHandler: { (data, error) in
+            if let dataObj = data as? Data {
+                self.articleImageView.image = UIImage(data: dataObj)
+            }
+        }, failureHandler: { (data, error) in
+            
+        })
+    }
 }
+

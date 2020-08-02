@@ -37,4 +37,24 @@ struct Media: Codable {
     id = try container.decodeIfPresent(String.self, forKey: .id)
   }
 
+    func getArticleImage(successHandler: @escaping SuccessBlock, failureHandler: @escaping FailureBlock) {
+            
+        if let url = URL(string: image ?? "") {
+                let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60)
+                let sessoinConfiguration = URLSessionConfiguration.default
+                sessoinConfiguration.timeoutIntervalForRequest = 60
+                sessoinConfiguration.httpCookieStorage = HTTPCookieStorage.shared
+                
+                let session = URLSession(configuration: sessoinConfiguration)
+                let task = session.dataTask(with: request) { (data, response, error) in
+                    if  error != nil {
+                        failureHandler(data, error)
+                    }
+                    if let data = data {
+                        successHandler(data, nil)
+                    }
+                }
+            task.resume()
+        }
+    }
 }

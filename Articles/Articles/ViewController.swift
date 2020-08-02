@@ -10,24 +10,34 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let viewModel: ArticlesViewModel = ArticlesViewModel()
+    lazy var articlesview: ArticlesView = {
+        return ArticlesView()
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
         self.navigationItem.title = "Articles"
+        self.view = articlesview
+        getCities()
+        binder()
     }
 }
 
-extension ViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell(style: .default, reuseIdentifier: "identifier")
+//MARK: API calls
+extension ViewController {
+    func binder() {
+        self.viewModel.model.bindAndFire { (articles) in
+                   
+        }
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    func getCities() {
+        self.viewModel.getArticles(page: 1, count: 10, successHandler: { (data, error) in
+            
+        }, failureHandler: { (data, error) in
+            
+        })
     }
 }
