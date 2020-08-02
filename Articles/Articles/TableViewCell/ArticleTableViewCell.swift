@@ -55,7 +55,9 @@ class ArticleTableViewCell: UITableViewCell {
     func setUserImage(user: User) {
         user.getAvatar(successHandler: { (data, error) in
             if let dataObj = data as? Data {
-                self.userImageView.image = UIImage(data: dataObj)
+                DispatchQueue.main.async {
+                    self.userImageView.image = UIImage(data: dataObj)
+                }
             }
         }, failureHandler: { (data, error) in
             
@@ -65,7 +67,9 @@ class ArticleTableViewCell: UITableViewCell {
     func setArticleImage(media: Media) {
         media.getArticleImage(successHandler: { (data, error) in
             if let dataObj = data as? Data {
-                self.articleImageView.image = UIImage(data: dataObj)
+                DispatchQueue.main.async {
+                    self.articleImageView.image = UIImage(data: dataObj)
+                }
             }
         }, failureHandler: { (data, error) in
             
