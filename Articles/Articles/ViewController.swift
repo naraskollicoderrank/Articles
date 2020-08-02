@@ -19,6 +19,9 @@ class ViewController: UIViewController, ArticlesDataProtocol {
         self.viewModel.delegate = self
         self.view.backgroundColor = .white
         self.navigationItem.title = "Articles"
+        self.tableView.rowHeight = 350
+        self.tableView.estimatedRowHeight = 350
+        
         getArticles()
     }
 }
@@ -61,6 +64,7 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ArticleTableViewCell.reuseidentifier, for: indexPath) as? ArticleTableViewCell
+        cell?.selectionStyle = .none
         if let articleObj = self.articles, articleObj.count > indexPath.row {
             cell?.configure(article: articleObj[indexPath.row])
         }

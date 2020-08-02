@@ -48,8 +48,10 @@ class ArticleTableViewCell: UITableViewCell {
         self.articleContent.text = article.content ?? ""
         self.articleTitle.text = article.media?.first?.title ?? ""
         self.articleURL.text = article.media?.first?.url ?? ""
-        self.likes.text = String(format: "%d/1000 Likes", article.likes ?? 0)
-        self.comments.text = String(format: "%d/1000 Comments", article.comments ?? 0)
+        let likes = (article.likes ?? 0)/1000
+        let comments = (article.comments ?? 0)/1000
+        self.likes.text = String(format: "%dK Likes", likes)
+        self.comments.text = String(format: "%dK Comments", comments)
     }
     
     func setUserImage(user: User) {
@@ -60,7 +62,7 @@ class ArticleTableViewCell: UITableViewCell {
                 }
             }
         }, failureHandler: { (data, error) in
-            
+            print("setavatar failure")
         })
     }
     
@@ -72,7 +74,7 @@ class ArticleTableViewCell: UITableViewCell {
                 }
             }
         }, failureHandler: { (data, error) in
-            
+            print("setImage failure")
         })
     }
 }
