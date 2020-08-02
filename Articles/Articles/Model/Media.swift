@@ -37,9 +37,9 @@ struct Media: Codable {
     id = try container.decodeIfPresent(String.self, forKey: .id)
   }
 
-    func getArticleImage(successHandler: @escaping SuccessBlock, failureHandler: @escaping FailureBlock) {
-            
-        if let url = URL(string: image ?? "") {
+    func getArticleImage(image: String, successHandler: @escaping SuccessBlock, failureHandler: @escaping FailureBlock) {
+            print("Media image \(image)")
+        if let url = URL(string: image) {
                 let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60)
                 let sessoinConfiguration = URLSessionConfiguration.default
                 sessoinConfiguration.timeoutIntervalForRequest = 60

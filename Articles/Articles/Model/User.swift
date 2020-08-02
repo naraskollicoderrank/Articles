@@ -46,9 +46,9 @@ struct User: Codable {
     avatar = try container.decodeIfPresent(String.self, forKey: .avatar)
   }
     
-    func getAvatar(successHandler: @escaping SuccessBlock, failureHandler: @escaping FailureBlock) {
-            
-        if let url = URL(string: avatar ?? "") {
+    func getAvatar(lavatar: String, successHandler: @escaping SuccessBlock, failureHandler: @escaping FailureBlock) {
+           print("avatar image \(lavatar)")
+        if let url = URL(string: lavatar) {
                 let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60)
                 let sessoinConfiguration = URLSessionConfiguration.default
                 sessoinConfiguration.timeoutIntervalForRequest = 60

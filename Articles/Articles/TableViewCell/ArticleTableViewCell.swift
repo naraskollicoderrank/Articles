@@ -37,7 +37,9 @@ class ArticleTableViewCell: UITableViewCell {
 
     
     func configure(article: Article) {
+        
         if let user = article.user?.first {
+            self.applyEffectstoAvatar()
             self.username.text = user.name
             self.userDesignation.text = user.designation
             setUserImage(user: user)
@@ -64,27 +66,39 @@ class ArticleTableViewCell: UITableViewCell {
     }
     
     func setUserImage(user: User) {
-        user.getAvatar(successHandler: { (data, error) in
-            if let dataObj = data as? Data {
-                DispatchQueue.main.async {
-                    self.userImageView.image = UIImage(data: dataObj)
-                }
-            }
-        }, failureHandler: { (data, error) in
-            print("setavatar failure")
-        })
+        user.getAvatar(lavatar: user.avatar ?? "",
+           successHandler: { (data, error) in
+               if let dataObj = data as? Data {
+                   DispatchQueue.main.async {
+                       self.userImageView.image = UIImage(data: dataObj)
+                   }
+               }
+           }, failureHandler: { (data, error) in
+               print("setavatar failure")
+           })
     }
     
     func setArticleImage(media: Media) {
-        media.getArticleImage(successHandler: { (data, error) in
-            if let dataObj = data as? Data {
-                DispatchQueue.main.async {
-                    self.articleImageView.image = UIImage(data: dataObj)
-                }
-            }
-        }, failureHandler: { (data, error) in
-            print("setImage failure")
-        })
+        media.getArticleImage(image: media.image ?? "",
+          successHandler: { (data, error) in
+              if let dataObj = data as? Data {
+                  DispatchQueue.main.async {
+                      self.articleImageView.image = UIImage(data: dataObj)
+                  }
+              }
+          }, failureHandler: { (data, error) in
+              print("setImage failure")
+          })
+    }
+    
+    func applyEffectstoAvatar() {
+        self.userImageView.layer.masksToBounds = true
+        self.userImageView.layer.cornerRadius = self.userImageView.frame.size.width / 2
+        self.userImageView.layer.shadowColor = UIColor.black.withAlphaComponent(0.35).cgColor
+        self.userImageView.layer.shadowOffset = CGSize(width: 0.5, height: 1.0)
+        self.userImageView.layer.shadowRadius = 4
+        self.userImageView.layer.shadowOpacity = 0.5
     }
 }
+
 
