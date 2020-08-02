@@ -47,16 +47,9 @@ class ArticleTableViewCell: UITableViewCell {
         if let media = article.media?.first {
             setArticleImage(media: media)
         }
-        self.articleContent.lineBreakMode = .byWordWrapping
-        self.articleContent.numberOfLines = 0
         self.articleContent.text = article.content ?? ""
-        
-        self.articleTitle.lineBreakMode = .byWordWrapping
-        self.articleTitle.numberOfLines = 0
+        self.articleContent.sizeToFit()
         self.articleTitle.text = article.media?.first?.title ?? ""
-        
-        self.articleURL.lineBreakMode = .byWordWrapping
-        self.articleURL.numberOfLines = 0
         self.articleURL.text = article.media?.first?.url ?? ""
         
         let likes = (article.likes ?? 0)/1000

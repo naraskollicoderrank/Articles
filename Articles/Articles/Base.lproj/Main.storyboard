@@ -50,9 +50,6 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Article Content goes here" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYh-ed-6ga">
                                                     <rect key="frame" x="10" y="198.5" width="384" height="20.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="20.5" id="cDU-Dl-EaF"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -109,7 +106,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="articleContent" destination="VYh-ed-6ga" id="1kq-WT-trL"/>
-                                            <outlet property="articleContentHeightConstraint" destination="cDU-Dl-EaF" id="tMd-zS-kmh"/>
                                             <outlet property="articleImageHeightConstraint" destination="88l-8g-ORG" id="gLx-2A-DXF"/>
                                             <outlet property="articleImageView" destination="8Jm-ph-d8T" id="e2M-Eq-SMF"/>
                                             <outlet property="articleTitle" destination="Atr-XK-jRL" id="RKe-Bp-aLw"/>
