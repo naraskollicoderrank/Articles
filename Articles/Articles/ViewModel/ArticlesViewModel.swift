@@ -15,11 +15,17 @@ typealias SuccessBlock = (_ response: Any?, _ error: Error?) -> Void
 typealias FailureBlock = (_ response: Any?, _ error: Error?) -> Void
 
 protocol ArticlesDataProtocol: class {
-    func updateArticles(articles: [Article]?)
+    func updateArticles()
 }
 
 class ArticlesViewModel: NSObject {
+    
+    var articles: [Article]?
     weak var delegate: ArticlesDataProtocol?
+    lazy var delegateanddatasource: ArticlesTableDataViewModel = {
+        let delegateAnddatasource = ArticlesTableDataViewModel(viewModel: self)
+        return delegateAnddatasource
+    }()
     
     override init() {
         super.init()
@@ -45,7 +51,8 @@ class ArticlesViewModel: NSObject {
                     if let dataObj = data {
                         let article = try? decoder.decode([Article].self, from: dataObj)
                         if let articleObj = article {
-                            self.delegate?.updateArticles(articles: articleObj)
+                            self.articles = articleObj
+                            self.delegate?.updateArticles()
                         }
                     }
                 }

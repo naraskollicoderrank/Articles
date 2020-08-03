@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8705A54324D7C030007E01C4 /* ArticlesTableDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8705A54224D7C030007E01C4 /* ArticlesTableDataViewModel.swift */; };
 		879B800C24D66DC40064610A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879B800B24D66DC40064610A /* AppDelegate.swift */; };
 		879B800E24D66DC40064610A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879B800D24D66DC40064610A /* SceneDelegate.swift */; };
 		879B801024D66DC40064610A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879B800F24D66DC40064610A /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8705A54224D7C030007E01C4 /* ArticlesTableDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlesTableDataViewModel.swift; sourceTree = "<group>"; };
 		879B800824D66DC40064610A /* Articles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Articles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		879B800B24D66DC40064610A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		879B800D24D66DC40064610A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				87EEE48824D6CBA400F088F6 /* ArticlesViewModel.swift */,
+				8705A54224D7C030007E01C4 /* ArticlesTableDataViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				879B804324D672100064610A /* Media.swift in Sources */,
 				879B801024D66DC40064610A /* ViewController.swift in Sources */,
 				87EEE49124D6D32800F088F6 /* ArticlesView.swift in Sources */,
+				8705A54324D7C030007E01C4 /* ArticlesTableDataViewModel.swift in Sources */,
 				87EEE48624D6C63200F088F6 /* ArticleTableViewCell.swift in Sources */,
 				87EEE48924D6CBA400F088F6 /* ArticlesViewModel.swift in Sources */,
 				879B800C24D66DC40064610A /* AppDelegate.swift in Sources */,

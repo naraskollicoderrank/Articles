@@ -8,10 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, ArticlesDataProtocol {
+class ViewController: UIViewController {
     let viewModel: ArticlesViewModel = ArticlesViewModel()
     @IBOutlet weak var tableView: UITableView!
-    var articles: [Article]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,53 +20,23 @@ class ViewController: UIViewController, ArticlesDataProtocol {
         self.navigationItem.title = "Articles"
         self.tableView.rowHeight = 350
         self.tableView.estimatedRowHeight = 350
-        
+        self.tableView.dataSource = self.viewModel.delegateanddatasource
         getArticles()
     }
 }
 
 //MARK: API calls
-extension ViewController {
+extension ViewController : ArticlesDataProtocol{
     
     func getArticles() {
         self.viewModel.getArticles(page: 1, count: 10)
     }
     
-    func updateArticles(articles: [Article]?) {
-        if let articlesArray = articles {
-            self.updateView(articles: articlesArray)
-        }
-    }
-    
-    func  updateView(articles: [Article]) {
-        self.articles = articles
-        if let _ = tableView {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+    func updateArticles() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
 }
 
-extension ViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 1
-        if let articleObj = self.articles,articleObj.count > 0 {
-            count = articleObj.count
-        }
-        return count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ArticleTableViewCell.reuseidentifier, for: indexPath) as? ArticleTableViewCell
-        cell?.selectionStyle = .none
-        if let articleObj = self.articles, articleObj.count > indexPath.row {
-            cell?.configure(article: articleObj[indexPath.row])
-        }
-        return cell ?? UITableViewCell()
-    }
-}
+
