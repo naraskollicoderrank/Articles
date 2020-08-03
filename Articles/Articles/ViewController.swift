@@ -18,8 +18,8 @@ class ViewController: UIViewController {
         self.viewModel.delegate = self
         self.view.backgroundColor = .white
         self.navigationItem.title = "Articles"
-        self.tableView.rowHeight = 350
-        self.tableView.estimatedRowHeight = 350
+        self.tableView.rowHeight = 380
+        self.tableView.estimatedRowHeight = 380
         self.tableView.dataSource = self.viewModel.delegateanddatasource
         //self.tableView.prefetchDataSource = self.viewModel.delegateanddatasource
         
