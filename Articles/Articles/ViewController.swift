@@ -21,6 +21,8 @@ class ViewController: UIViewController {
         self.tableView.rowHeight = 350
         self.tableView.estimatedRowHeight = 350
         self.tableView.dataSource = self.viewModel.delegateanddatasource
+        //self.tableView.prefetchDataSource = self.viewModel.delegateanddatasource
+        
         getArticles()
     }
 }

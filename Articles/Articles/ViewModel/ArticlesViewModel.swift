@@ -23,7 +23,8 @@ class ArticlesViewModel: NSObject {
     var articles: [Article]?
     weak var delegate: ArticlesDataProtocol?
     lazy var delegateanddatasource: ArticlesTableDataViewModel = {
-        let delegateAnddatasource = ArticlesTableDataViewModel(viewModel: self)
+        let delegateAnddatasource: ArticlesTableDataViewModel = ArticlesTableDataViewModel(viewModel: self)
+        delegateAnddatasource.prefetchdelegate = self
         return delegateAnddatasource
     }()
     
@@ -31,7 +32,7 @@ class ArticlesViewModel: NSObject {
         super.init()
     }
     
-    func getArticles(page: Int, count: Int) {
+    func getArticles(page: Int, count: Int = 10) {
         let urlStr: String = String(format: articlesurl, page, count)
         if let url = URL(string: urlStr) {
             let urlRequest = URLRequest(url:url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 60)
@@ -51,8 +52,16 @@ class ArticlesViewModel: NSObject {
                     if let dataObj = data {
                         let article = try? decoder.decode([Article].self, from: dataObj)
                         if let articleObj = article {
-                            self.articles = articleObj
-                            self.delegate?.updateArticles()
+                            if articleObj.count > 0 {
+                                if self.articles == nil {
+                                    self.articles = articleObj
+                                } else {
+                                    self.articles?.append(contentsOf: articleObj)
+                                }
+                                self.delegate?.updateArticles()
+                            } else {
+                                self.delegateanddatasource.fromIndex -= 1
+                            }
                         }
                     }
                 }
@@ -62,3 +71,8 @@ class ArticlesViewModel: NSObject {
     }
 }
 
+extension ArticlesViewModel: ArticlesPrefetchDelegate {
+    func getArticles(index: Int) {
+        getArticles(page: index)
+    }
+}
